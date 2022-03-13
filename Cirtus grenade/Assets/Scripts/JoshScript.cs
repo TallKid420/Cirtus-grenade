@@ -116,7 +116,7 @@ public class JoshScript : MonoBehaviour
                         transform.position = returntarget.position;
                         returntarget = null;
                         ReturnNow = false;
-
+                        StopCoroutine(ReturnTime(0));
 
                     }
                 }

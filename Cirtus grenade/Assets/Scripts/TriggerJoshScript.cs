@@ -8,6 +8,7 @@ public class TriggerJoshScript : MonoBehaviour
     [SerializeField] List<Transform> JoshSpawnSpots;
     [SerializeField] Transform Josh;
     JoshScript JoshScript;
+    bool triggerDisabled = false;
     void Start()
     {
         JoshScript = Josh.GetComponent<JoshScript>();
@@ -36,11 +37,12 @@ public class TriggerJoshScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.ToLower().Contains("player") && !JoshScript.GetTarget())
+        if (other.tag.ToLower().Contains("player") && !JoshScript.GetTarget() && !triggerDisabled)
         {
             int RandomTarget = Random.Range(0, JoshSpawnSpots.Count);
           //  print(RandomTarget);
             JoshScript.SetTarget(JoshSpawnSpots[RandomTarget].GetChild(0));
+            triggerDisabled = true;
         }
     }
 
